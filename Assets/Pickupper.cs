@@ -18,8 +18,9 @@ public class Pickupper : MonoBehaviour {
         inputId = "[" + gameObject.name + "] Grab";
         platformerCharacter2D = GetComponent<PlatformerCharacter2D>();
     }
-    // Use this for initialization
-    void Start () {
+    
+    void Start ()
+    {
         StartCoroutine(pickupCheck());
     }
 
@@ -60,10 +61,15 @@ public class Pickupper : MonoBehaviour {
                 projectilePos.x = projectilePos.x + projectileDir;
                 grabCollider.transform.position = projectilePos;
                 grabCollider.isTrigger = false;
+
+                var pickup = grabCollider.gameObject.GetComponent<Pickuppable>();
+                pickup.OnDrop(gameObject.GetComponent<ProjectileLauncher>());
+
                 grabCollider = null;
 
                 while (CrossPlatformInputManager.GetButton(inputId))
                     yield return null;
+                
                 StartCoroutine(pickupCheck());
                 break;
             }
@@ -89,6 +95,7 @@ public class Pickupper : MonoBehaviour {
                 joint.distance = 0f;
                 attachJoint = joint;
                 StartCoroutine(dropCheck());
+                pickup.OnPickup(gameObject.GetComponent<ProjectileLauncher>());
             }
             //coll.gameObject.SendMessage("ApplyDamage", 10);
         }

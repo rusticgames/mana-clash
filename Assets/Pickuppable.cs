@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Pickuppable : MonoBehaviour {
+public class Pickuppable : MonoBehaviour
+{
+  public void OnPickup(ProjectileLauncher p)
+  {
+    p.isCharger = true;   
+  }
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+  public void OnDrop(ProjectileLauncher p)
+  {
+    p.isCharger = false;   
+  }
 }
