@@ -5,17 +5,20 @@ using UnityStandardAssets._2D;
 
 public class ProjectileLauncher : MonoBehaviour
 {
-
     public GameObject projectile;
+    public bool isCharger;
     public int projectileDir = 1;
-    private PlatformerCharacter2D platformerCharacter2D;
-
+    public float chargePower = 20.0f;
+    public float chargedTime = 0f;
     public string inputId;
+
+    private PlatformerCharacter2D platformerCharacter2D;
 
     void Reset()
     {
         inputId = "[" + gameObject.name + "] Fire";
     }
+ 
     void Awake()
     {
         platformerCharacter2D = GetComponent<PlatformerCharacter2D>();
@@ -23,13 +26,20 @@ public class ProjectileLauncher : MonoBehaviour
 
     void Update()
     {
-        projectileDir = platformerCharacter2D.m_FacingRight ? 1 : -1;
-        if (CrossPlatformInputManager.GetButtonDown(inputId))
-        {
+        if (isCharger && CrossPlatformInputManager.GetButton(inputId)) {
+          chargedTime = chargedTime + Time.deltaTime;
+        }
+
+        if (CrossPlatformInputManager.GetButtonUp(inputId)) {
             Vector3 projectilePos = gameObject.transform.position;
             projectilePos.x = projectilePos.x + projectileDir;
             GameObject forceBall = GameObject.Instantiate(projectile, projectilePos, Quaternion.identity) as GameObject;
             forceBall.GetComponent<ForceBall>().moveDir = projectileDir;
+
+            if (isCharger) {
+               forceBall.GetComponent<ForceBall>().moveSpeed = chargedTime * chargePower;
+               chargedTime = 0f;
+            }
         }
-    }
+  }
 }
