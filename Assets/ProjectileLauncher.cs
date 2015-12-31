@@ -22,6 +22,8 @@ public class ProjectileLauncher : MonoBehaviour
 
     void Update()
     {
+        var projectileDir = platformerCharacter2D.m_FacingRight ? 1 : -1;
+
         if (isCharger && CrossPlatformInputManager.GetButton(inputId)) {
           chargedTime = chargedTime + Time.deltaTime;
         }
