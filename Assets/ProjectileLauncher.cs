@@ -7,6 +7,7 @@ public class ProjectileLauncher : MonoBehaviour
 {
     public GameObject projectile;
     public bool isCharger;
+    public bool isKiller;
     public int projectileDir = 1;
     public float chargePower = 20.0f;
     public float chargedTime = 0f;
@@ -31,11 +32,14 @@ public class ProjectileLauncher : MonoBehaviour
         if (CrossPlatformInputManager.GetButtonUp(inputId)) {
             Vector3 projectilePos = gameObject.transform.position;
             projectilePos.x = projectilePos.x + projectileDir;
-            GameObject forceBall = GameObject.Instantiate(projectile, projectilePos, Quaternion.identity) as GameObject;
-            forceBall.GetComponent<ForceBall>().moveDir = projectileDir;
+            var forceBallObject = GameObject.Instantiate(projectile, projectilePos, Quaternion.identity) as GameObject;
+            var forceBall = forceBallObject.GetComponent<ForceBall>();
+            forceBall.isKiller = isKiller;
+            forceBall.moveDir = projectileDir;
+
 
             if (isCharger) {
-               forceBall.GetComponent<ForceBall>().moveSpeed = chargedTime * chargePower;
+               forceBall.moveSpeed = chargedTime * chargePower;
                chargedTime = 0f;
             }
         }

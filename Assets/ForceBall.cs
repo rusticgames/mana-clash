@@ -6,6 +6,7 @@ public class ForceBall : MonoBehaviour
 
   public float moveSpeed;
   public int moveDir;
+    public bool isKiller;
 
   private Rigidbody2D m_Rigidbody2D;
 
@@ -21,6 +22,8 @@ public class ForceBall : MonoBehaviour
 
   void OnCollisionEnter2D(Collision2D coll)
   {
+        Debug.Log("I'm forceball");
+        if (isKiller) GameObject.Destroy(coll.gameObject);
     GameObject.Destroy(gameObject, 0.1f);
   }
 }
