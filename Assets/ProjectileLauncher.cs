@@ -13,14 +13,10 @@ public class ProjectileLauncher : MonoBehaviour
     public string inputId;
 
     private PlatformerCharacter2D platformerCharacter2D;
-
-    void Reset()
-    {
-        inputId = "[" + gameObject.name + "] Fire";
-    }
- 
+    
     void Awake()
     {
+        inputId = "[" + gameObject.name + "] Fire";
         platformerCharacter2D = GetComponent<PlatformerCharacter2D>();
     }
 

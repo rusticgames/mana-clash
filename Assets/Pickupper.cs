@@ -13,9 +13,10 @@ public class Pickupper : MonoBehaviour {
 
     public string inputId;
 
-    void Reset()
+    void Awake()
     {
         inputId = "[" + gameObject.name + "] Grab";
+        platformerCharacter2D = GetComponent<PlatformerCharacter2D>();
     }
     // Use this for initialization
     void Start () {
@@ -70,11 +71,7 @@ public class Pickupper : MonoBehaviour {
         }
         yield return null;
     }
-
-    void Awake()
-    {
-        platformerCharacter2D = GetComponent<PlatformerCharacter2D>();
-    }
+    
     void OnCollisionEnter2D(Collision2D coll)
     {
         if (grabbing)
