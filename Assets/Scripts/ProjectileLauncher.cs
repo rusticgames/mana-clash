@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 using System.Collections;
-using UnityStandardAssets._2D;
 
 public class ProjectileLauncher : MonoBehaviour
 {

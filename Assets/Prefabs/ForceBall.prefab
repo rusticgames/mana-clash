@@ -75,6 +75,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   moveDir: 0
+  isKiller: 0
 --- !u!212 &21260488
 SpriteRenderer:
   m_ObjectHideFlags: 1
