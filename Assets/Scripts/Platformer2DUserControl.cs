@@ -26,7 +26,7 @@ public class Platformer2DUserControl : MonoBehaviour
             m_Jump = inputManager.isActionDown(InputManager.Actions.jump);
         }
 
-	if (inputManager.isAction(InputManager.Actions.suicide)) m_Character.Suicide();
+	if (inputManager.isAction(InputManager.Actions.suicide)) m_Character.Die();
     }
 
     private void FixedUpdate()

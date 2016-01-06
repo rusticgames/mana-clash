@@ -104,10 +104,19 @@ public class PlatformerCharacter2D : MonoBehaviour
         }
     }
 
-    public void Suicide()
+    public void Die()
     {
 	gameStateManager.PlayerLose(gameObject);
 	GameObject.Destroy(gameObject);
+    }
+
+    void OnCollisionEnter2D(Collision2D coll)
+    {
+	var interactable = coll.gameObject.GetComponent<Interactable>();
+
+	if (interactable != null) {
+	    if (interactable.killOnTouch) Die();
+	}
     }
 
 
