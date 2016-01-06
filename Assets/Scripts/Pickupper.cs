@@ -9,14 +9,11 @@ public class Pickupper : MonoBehaviour {
     public Collider2D grabCollider;
     public Joint2D attachJoint;
     public bool grabbing = false;
-    private PlatformerCharacter2D platformerCharacter2D;
-
-    public string inputId;
-
+    private Platformer2DUserControl platformerControls;
+		
     void Awake()
     {
-        inputId = "[" + gameObject.name + "] Grab";
-        platformerCharacter2D = GetComponent<PlatformerCharacter2D>();
+        platformerControls = GetComponent<Platformer2DUserControl>();
     }
     
     void Start ()
@@ -29,9 +26,9 @@ public class Pickupper : MonoBehaviour {
         while (running)
         {
             grabbing = false;
-            if (CrossPlatformInputManager.GetButtonDown(inputId))
+            if (platformerControls.inputManager.isActionDown(InputManager.Actions.grab))
             {
-                while (CrossPlatformInputManager.GetButton(inputId))
+                while (platformerControls.inputManager.isAction(InputManager.Actions.grab))
                 {
                     grabbing = true;
                     yield return null;
@@ -52,13 +49,12 @@ public class Pickupper : MonoBehaviour {
     {
         while (running)
         {
-            if (CrossPlatformInputManager.GetButtonDown(inputId))
+            if (platformerControls.inputManager.isActionDown(InputManager.Actions.grab))
             {
                 GameObject.Destroy(attachJoint);
 
-                var projectileDir = platformerCharacter2D.m_FacingRight ? 1 : -1;
                 Vector3 projectilePos = gameObject.transform.position;
-                projectilePos.x = projectilePos.x + projectileDir;
+                projectilePos.x = projectilePos.x + platformerControls.lastFacingDirection;
                 grabCollider.transform.position = projectilePos;
                 grabCollider.isTrigger = false;
 
@@ -67,7 +63,7 @@ public class Pickupper : MonoBehaviour {
 
                 grabCollider = null;
 
-                while (CrossPlatformInputManager.GetButton(inputId))
+                while (platformerControls.inputManager.isAction(InputManager.Actions.grab))
                     yield return null;
                 
                 StartCoroutine(pickupCheck());
