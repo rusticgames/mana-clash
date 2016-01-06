@@ -7,34 +7,29 @@ public class ProjectileLauncher : MonoBehaviour
     public GameObject projectile;
     public bool isCharger;
     public bool isKiller;
-    public int projectileDir = 1;
     public float chargePower = 20.0f;
     public float chargedTime = 0f;
-    public string inputId;
 
-    private PlatformerCharacter2D platformerCharacter2D;
+    private Platformer2DUserControl platformerControls;
     
     void Awake()
     {
-        inputId = "[" + gameObject.name + "] Fire";
-        platformerCharacter2D = GetComponent<PlatformerCharacter2D>();
+        platformerControls = GetComponent<Platformer2DUserControl>();
     }
 
     void Update()
     {
-        var projectileDir = platformerCharacter2D.m_FacingRight ? 1 : -1;
-
-        if (isCharger && CrossPlatformInputManager.GetButton(inputId)) {
+        if (isCharger && platformerControls.inputManager.isAction(InputManager.Actions.shoot)) {
           chargedTime = chargedTime + Time.deltaTime;
         }
 
-        if (CrossPlatformInputManager.GetButtonUp(inputId)) {
+        if (platformerControls.inputManager.isActionUp(InputManager.Actions.shoot)) {
             Vector3 projectilePos = gameObject.transform.position;
-            projectilePos.x = projectilePos.x + projectileDir;
+            projectilePos.x = projectilePos.x + platformerControls.lastFacingDirection;
             var forceBallObject = GameObject.Instantiate(projectile, projectilePos, Quaternion.identity) as GameObject;
             var forceBall = forceBallObject.GetComponent<ForceBall>();
             forceBall.isKiller = isKiller;
-            forceBall.moveDir = projectileDir;
+            forceBall.moveDir = platformerControls.lastFacingDirection;
 
 
             if (isCharger) {

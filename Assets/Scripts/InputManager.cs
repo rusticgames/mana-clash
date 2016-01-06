@@ -57,4 +57,9 @@ public class InputManager : MonoBehaviour
     {
         return Input.GetKeyDown(actionToInputMap[action]);
     }
+
+    public bool isActionUp(Actions action)
+    {
+        return Input.GetKeyUp(actionToInputMap[action]);
+    }
 }
