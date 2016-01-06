@@ -37,8 +37,8 @@ public class InputManager : MonoBehaviour
         } else {
             inputToActionMap[KeyCode.A]     = Actions.moveLeft;
             inputToActionMap[KeyCode.D]     = Actions.moveRight;
-            inputToActionMap[KeyCode.F]     = Actions.jump;
-            inputToActionMap[KeyCode.W]     = Actions.grab;
+            inputToActionMap[KeyCode.W]     = Actions.jump;
+            inputToActionMap[KeyCode.F] = Actions.grab;
             inputToActionMap[KeyCode.G]     = Actions.shoot;
             inputToActionMap[KeyCode.S]     = Actions.crouch;
             inputToActionMap[KeyCode.Q]     = Actions.suicide;
