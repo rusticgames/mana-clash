@@ -10,7 +10,8 @@ public class InputManager : MonoBehaviour
         jump,
         grab,
         shoot,
-        crouch
+        crouch,
+	suicide
     }
 
     [SerializeField]
@@ -32,6 +33,7 @@ public class InputManager : MonoBehaviour
             inputToActionMap[KeyCode.RightShift] = Actions.grab;
             inputToActionMap[KeyCode.RightAlt]   = Actions.shoot;
             inputToActionMap[KeyCode.DownArrow]  = Actions.crouch;
+            inputToActionMap[KeyCode.Delete]     = Actions.suicide;
         } else {
             inputToActionMap[KeyCode.A]     = Actions.moveLeft;
             inputToActionMap[KeyCode.D]     = Actions.moveRight;
@@ -39,6 +41,7 @@ public class InputManager : MonoBehaviour
             inputToActionMap[KeyCode.Space] = Actions.grab;
             inputToActionMap[KeyCode.G]     = Actions.shoot;
             inputToActionMap[KeyCode.S]     = Actions.crouch;
+            inputToActionMap[KeyCode.Q]     = Actions.suicide;
         }
 
         foreach (var item in inputToActionMap.Keys)

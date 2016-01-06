@@ -25,6 +25,8 @@ public class Platformer2DUserControl : MonoBehaviour
             // m_Jump = CrossPlatformInputManager.GetButtonDown("[" + gameObject.name + "] Jump");
             m_Jump = inputManager.isActionDown(InputManager.Actions.jump);
         }
+
+	if (inputManager.isAction(InputManager.Actions.suicide)) m_Character.Suicide();
     }
 
     private void FixedUpdate()

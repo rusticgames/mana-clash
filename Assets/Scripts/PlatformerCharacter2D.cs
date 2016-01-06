@@ -4,6 +4,7 @@ using System;
 public class PlatformerCharacter2D : MonoBehaviour
 {
     public bool m_FacingRight = true;  // For determining which way the player is currently facing.
+    public GameStateManager gameStateManager;
 
     [SerializeField] private float m_MaxSpeed = 10f;                    // The fastest the player can travel in the x axis.
     [SerializeField] private float m_JumpForce = 400f;                  // Amount of force added when the player jumps.
@@ -26,6 +27,11 @@ public class PlatformerCharacter2D : MonoBehaviour
         m_CeilingCheck = transform.Find("CeilingCheck");
         m_Anim = GetComponent<Animator>();
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
+    }
+
+    void Start()
+    {
+	gameStateManager.RegisterPlayer(gameObject);
     }
 
 
@@ -96,6 +102,12 @@ public class PlatformerCharacter2D : MonoBehaviour
             m_Anim.SetBool("Ground", false);
             m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
         }
+    }
+
+    public void Suicide()
+    {
+	gameStateManager.PlayerLose(gameObject);
+	GameObject.Destroy(gameObject);
     }
 
 
