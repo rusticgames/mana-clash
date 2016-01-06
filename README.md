@@ -1,6 +1,6 @@
 # Mana Clash: Clash of Manamages
 
-## To-do
+## To do
 
 - ~~Kill box~~
 - Text UI
