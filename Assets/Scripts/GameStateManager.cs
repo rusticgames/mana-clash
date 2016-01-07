@@ -23,7 +23,10 @@ public class GameStateManager : MonoBehaviour
     {
         yield return new WaitUntil(() => playersList.Count > 1);
         yield return new WaitWhile(() => activePlayersList.Count > 1);
-        Debug.Log("Victory for " + activePlayersList[0].name + "!");
+        yield return new WaitForSeconds(1f);
+        var victoryMessage = "Game Over: Draw";
+        if(activePlayersList.Count == 1) victoryMessage = "Victory for " + activePlayersList[0].name + "!";
+        Debug.Log(victoryMessage);
         yield return null;
     }
 
