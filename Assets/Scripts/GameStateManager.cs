@@ -7,41 +7,34 @@ public class GameStateManager : MonoBehaviour
 
     public List<GameObject> playersList;
     public List<GameObject> activePlayersList;
-	
+
     void Awake()
     {
-	playersList = new List<GameObject>();
-	activePlayersList = new List<GameObject>();
+        playersList = new List<GameObject>();
+        activePlayersList = new List<GameObject>();
     }
 
     void Start()
     {
-	StartCoroutine(VictoryCheck());
+        StartCoroutine(VictoryCheck());
     }
 
     IEnumerator VictoryCheck()
     {
-	while (playersList.Count < 2) {
-	    yield return null;
-	}
-
-	while (activePlayersList.Count > 1) {
-	    yield return null;
-	}
-
-	Debug.Log("Victory for " + activePlayersList[0].name + "!");
-
-	yield return null;
+        yield return new WaitUntil(() => playersList.Count > 1);
+        yield return new WaitWhile(() => activePlayersList.Count > 1);
+        Debug.Log("Victory for " + activePlayersList[0].name + "!");
+        yield return null;
     }
-    
+
     public void RegisterPlayer(GameObject player)
     {
-	playersList.Add(player);
-	activePlayersList.Add(player);
+        playersList.Add(player);
+        activePlayersList.Add(player);
     }
 
     public void PlayerLose(GameObject player)
     {
-	activePlayersList.Remove(player);
+        activePlayersList.Remove(player);
     }
 }
