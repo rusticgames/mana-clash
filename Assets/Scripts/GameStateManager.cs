@@ -8,6 +8,12 @@ public class GameStateManager : MonoBehaviour
     public List<GameObject> playersList;
     public List<GameObject> activePlayersList;
     public UnityEngine.UI.Text notifiee;
+    public string nextSceneName;
+
+		void Reset()
+		{
+			nextSceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+    }
 
     void Awake()
     {
@@ -24,13 +30,13 @@ public class GameStateManager : MonoBehaviour
     {
         yield return new WaitUntil(() => playersList.Count > 1);
         yield return new WaitWhile(() => activePlayersList.Count > 1);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         var victoryMessage = "Game Over: Draw";
         if(activePlayersList.Count == 1) victoryMessage = "Victory for " + activePlayersList[0].name + "!";
         notifiee.text = victoryMessage;
         Debug.Log(victoryMessage);
-        yield return new WaitForSeconds(1f);
-        notifiee.text = victoryMessage + "\nPress Jump to Continue";
+        yield return new WaitForSeconds(2f);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(nextSceneName);
         yield return null;
     }
 
