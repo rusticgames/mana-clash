@@ -5,6 +5,8 @@ public class PlatformerCharacter2D : MonoBehaviour
 {
     public bool m_FacingRight = true;  // For determining which way the player is currently facing.
     public GameStateManager gameStateManager;
+    public UnityEngine.UI.Text playerInfoText;
+    public Inventory inventory;
 
     [SerializeField] private float m_MaxSpeed = 10f;                    // The fastest the player can travel in the x axis.
     [SerializeField] private float m_JumpForce = 400f;                  // Amount of force added when the player jumps.
@@ -27,13 +29,21 @@ public class PlatformerCharacter2D : MonoBehaviour
         m_CeilingCheck = transform.Find("CeilingCheck");
         m_Anim = GetComponent<Animator>();
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
+	inventory = GetComponent<Inventory>();
     }
 
     void Start()
     {
 	gameStateManager.RegisterPlayer(gameObject);
+	UnityEngine.UI.Text p = gameStateManager.playerInfoPrefab.GetComponent<UnityEngine.UI.Text>();
+	playerInfoText = GameObject.Instantiate(p);
+	playerInfoText.transform.parent = gameStateManager.playerInfoLayout.transform;
     }
 
+    void Update()
+    {
+	playerInfoText.text = name + inventory.ListItems();
+    }
 
     private void FixedUpdate()
     {

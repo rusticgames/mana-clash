@@ -33,6 +33,7 @@ GameObject:
   - 114: {fileID: 11466106}
   - 114: {fileID: 11482042}
   - 114: {fileID: 11469072}
+  - 114: {fileID: 11403460}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -155,6 +156,19 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11403460
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 114916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 077153b45928b44b6a5e10a4e27ef963, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: 
+  items: []
 --- !u!114 &11419310
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -167,6 +181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputManager: {fileID: 0}
+  lastFacingDirection: 1
 --- !u!114 &11442608
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -181,10 +196,8 @@ MonoBehaviour:
   projectile: {fileID: 187716, guid: c3935a3371d2044418d023742711e17d, type: 2}
   isCharger: 0
   isKiller: 0
-  projectileDir: 1
   chargePower: 20
   chargedTime: 0
-  inputId: 
 --- !u!114 &11466106
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -196,6 +209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dda799e62fde4a68b404466a140f3a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useAlternateInput: 0
 --- !u!114 &11469072
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -208,6 +222,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_FacingRight: 1
+  gameStateManager: {fileID: 0}
+  playerInfoText: {fileID: 0}
+  inventory: {fileID: 0}
   m_MaxSpeed: 10
   m_JumpForce: 600
   m_CrouchSpeed: 0.36
@@ -230,7 +247,6 @@ MonoBehaviour:
   grabCollider: {fileID: 0}
   attachJoint: {fileID: 0}
   grabbing: 0
-  inputId: 
 --- !u!212 &21237682
 SpriteRenderer:
   m_ObjectHideFlags: 1

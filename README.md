@@ -8,4 +8,4 @@
 - Better placeholder art
 - ~~Restart~~
 - ~~Victory delay~~
-
+- Level editor
