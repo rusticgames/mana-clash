@@ -3,9 +3,9 @@
 ## To do
 
 - ~~Kill box~~
-- Text UI
+- ~~Text UI~~
 - Gamepad support
 - Better placeholder art
-- Restart
-- Victory delay
+- ~~Restart~~
+- ~~Victory delay~~
 
