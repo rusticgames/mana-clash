@@ -7,6 +7,7 @@ public class GameStateManager : MonoBehaviour
 
     public List<GameObject> playersList;
     public List<GameObject> activePlayersList;
+    public UnityEngine.UI.Text notifiee;
 
     void Awake()
     {
@@ -26,7 +27,10 @@ public class GameStateManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         var victoryMessage = "Game Over: Draw";
         if(activePlayersList.Count == 1) victoryMessage = "Victory for " + activePlayersList[0].name + "!";
+        notifiee.text = victoryMessage;
         Debug.Log(victoryMessage);
+        yield return new WaitForSeconds(1f);
+        notifiee.text = victoryMessage + "\nPress Jump to Continue";
         yield return null;
     }
 
