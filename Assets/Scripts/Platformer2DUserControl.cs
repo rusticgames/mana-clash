@@ -2,14 +2,14 @@
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 
-[RequireComponent(typeof (PlatformerCharacter2D))]
-[RequireComponent(typeof (InputManager))]
+[RequireComponent(typeof(PlatformerCharacter2D))]
+[RequireComponent(typeof(InputManager))]
 public class Platformer2DUserControl : MonoBehaviour
 {
     private PlatformerCharacter2D m_Character;
     private bool m_Jump;
     public InputManager inputManager;
-		public int lastFacingDirection = 1;
+    public int lastFacingDirection = 1;
 
     private void Awake()
     {
@@ -19,6 +19,7 @@ public class Platformer2DUserControl : MonoBehaviour
 
     private void Update()
     {
+        if (inputManager.isAction(InputManager.Actions.menu)) m_Character.Menu();
         if (!m_Jump)
         {
             // Read the jump input in Update so button presses aren't missed.
@@ -26,7 +27,7 @@ public class Platformer2DUserControl : MonoBehaviour
             m_Jump = inputManager.isActionDown(InputManager.Actions.jump);
         }
 
-	if (inputManager.isAction(InputManager.Actions.suicide)) m_Character.Die();
+        if (inputManager.isAction(InputManager.Actions.suicide)) m_Character.Die();
     }
 
     private void FixedUpdate()
@@ -35,9 +36,9 @@ public class Platformer2DUserControl : MonoBehaviour
         bool crouch = false;
         //float h = CrossPlatformInputManager.GetAxis("[" + gameObject.name + "] Horizontal");
         int h = 0;
-        if (inputManager.isAction(InputManager.Actions.moveLeft))  h = -1;
+        if (inputManager.isAction(InputManager.Actions.moveLeft)) h = -1;
         if (inputManager.isAction(InputManager.Actions.moveRight)) h = 1;
-				lastFacingDirection = (h != 0) ? h : lastFacingDirection;
+        lastFacingDirection = (h != 0) ? h : lastFacingDirection;
         // Pass all parameters to the character control script.
         m_Character.Move((float)h, crouch, m_Jump);
         m_Jump = false;
