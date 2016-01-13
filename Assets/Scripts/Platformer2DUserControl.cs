@@ -28,6 +28,7 @@ public class Platformer2DUserControl : MonoBehaviour
         }
 
         if (inputManager.isAction(InputManager.Actions.suicide)) m_Character.Die();
+				if (inputManager.isActionDown(InputManager.Actions.shoot)) m_Character.inventory.useHeldItems();
     }
 
     private void FixedUpdate()

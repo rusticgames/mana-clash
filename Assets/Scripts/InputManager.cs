@@ -134,11 +134,21 @@ public class InputManager : MonoBehaviour
         {
             inputToActionMap[new ContinuousInput("j1_0", true)] = Actions.moveLeft;
             inputToActionMap[new ContinuousInput("j1_0", false)] = Actions.moveRight;
-            inputToActionMap[new DiscreteInput(KeyCode.JoystickButton2)] = Actions.jump;
-            inputToActionMap[new DiscreteInput(KeyCode.JoystickButton3)] = Actions.grab;
-            inputToActionMap[new DiscreteInput(KeyCode.JoystickButton4)] = Actions.shoot;
-            inputToActionMap[new DiscreteInput(KeyCode.JoystickButton5)] = Actions.crouch;
-            inputToActionMap[new DiscreteInput(KeyCode.JoystickButton6)] = Actions.suicide;
+            inputToActionMap[new DiscreteInput(KeyCode.Joystick1Button0)] = Actions.jump;
+            inputToActionMap[new DiscreteInput(KeyCode.Joystick1Button3)] = Actions.grab;
+            inputToActionMap[new DiscreteInput(KeyCode.Joystick1Button2)] = Actions.shoot;
+            inputToActionMap[new DiscreteInput(KeyCode.Joystick1Button5)] = Actions.crouch;
+            inputToActionMap[new DiscreteInput(KeyCode.Joystick1Button6)] = Actions.suicide;
+            if (useAlternateInput)
+            {
+                inputToActionMap[new ContinuousInput("j2_0", true)] = Actions.moveLeft;
+                inputToActionMap[new ContinuousInput("j2_0", false)] = Actions.moveRight;
+                inputToActionMap[new DiscreteInput(KeyCode.Joystick2Button0)] = Actions.jump;
+                inputToActionMap[new DiscreteInput(KeyCode.Joystick2Button3)] = Actions.grab;
+                inputToActionMap[new DiscreteInput(KeyCode.Joystick2Button2)] = Actions.shoot;
+                inputToActionMap[new DiscreteInput(KeyCode.Joystick2Button5)] = Actions.crouch;
+                inputToActionMap[new DiscreteInput(KeyCode.Joystick2Button6)] = Actions.suicide;
+            }
         }
         foreach (var item in inputToActionMap.Keys)
         {
@@ -154,12 +164,12 @@ public class InputManager : MonoBehaviour
 
     public bool isActionDown(Actions action)
     {
-        return actionToInputMap[action].isDiscreteInput();
+        return actionToInputMap[action].isDiscreteInputDown();
     }
 
     public bool isActionUp(Actions action)
     {
-        return actionToInputMap[action].isDiscreteInput();
+        return actionToInputMap[action].isDiscreteInputUp();
     }
 
     public float getContinuousAction(Actions action)
